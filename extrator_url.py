@@ -46,6 +46,18 @@ class ExtratorURL:
             valor = url_parametros[indice_valor:indice_e_comercial]
         return valor
 
+    def converte_valores(self):
+        moeda_destino = self.get_valor_parametro("moedaDestino")
+        #moeda_origem = self.get_valor_parametro("moedaOrigem")
+        valor_dolar_real = 5.5
+        quantidade = float(self.get_valor_parametro("quantidade"))
+
+        if moeda_destino == "real":
+            return round(quantidade*valor_dolar_real,2)
+        else:
+            return round(quantidade/valor_dolar_real,2)
+
+
     def __len__(self):
         return len(self.url)
 
@@ -61,3 +73,5 @@ print("O tamanho da URL: ", len(extrator_url))
 print(extrator_url)
 valor_quantidade = extrator_url.get_valor_parametro("quantidade")
 print(valor_quantidade)
+conversao = extrator_url.converte_valores()
+print("Valor convertido: ", conversao)
